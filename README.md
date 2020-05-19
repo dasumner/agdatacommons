@@ -38,7 +38,7 @@ It is assumed that the resource group has been created.  The administrator shoul
 
 Your appId, password, sp_name, and tenant are returned. Make a note of the appId and password.
 
-4. Save these values in a shell script in the console storage:
+4. Save these values in a shell script to the console storage:
 > #!/bin/sh
 echo "Setting environment variables for Terraform"
 export ARM_SUBSCRIPTION_ID=your_subscription_id
