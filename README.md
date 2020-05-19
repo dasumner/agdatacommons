@@ -32,11 +32,11 @@ The resource group will contain the production infrastructure and one or more co
 
 ## Migration Tasks
 After the infrastructure has been provisioned, the following tasks must be performed to complete the migration from the OnPrem environment to the Azure cloud environment:
-A full backup of the production database in the existing deployment will be taken.  The database dump files will be migrated to Azure and then loaded into the cloud database via import.
-To implement HTTPS, an SSL certificate must be obtained by USDA and then loaded into the Azure application gateway.
+1. A full backup of the production database in the existing deployment will be taken.  The database dump files will be migrated to Azure and then loaded into the cloud database via import.
+2. To implement HTTPS, an SSL certificate must be obtained by USDA and then loaded into the Azure application gateway.
 USDA will have to update DNS to associate the existing data.nal.usda.gov domain with the new public IP in Azure.
-A service principal account must be created in Azure.  Credentials for the service principal must be loaded into the Jenkins server where pipeline jobs will be executed.
-Pipelines must be loaded into Jenkins server (manually or via import).
+3. A service principal account must be created in Azure.  Credentials for the service principal must be loaded into the Jenkins server where pipeline jobs will be executed.
+4. Pipelines must be loaded into Jenkins server (manually or via import).
 
 ## Database
 The database service has integrated backup functionality.  Using a combination of full, incremental and transaction log backups the database can be restored to any point-in-time within the backup retention period.  The integrated firewall only permits connection to the database from the Web and Solr services running in the Docker containers.  All other traffic is blocked.  The restoration process will create a new database server and instance.
