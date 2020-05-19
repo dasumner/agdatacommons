@@ -35,10 +35,11 @@ It is assumed that the resource group has been created.  The administrator shoul
 
 3. Create a service principal for use by Terraform and Jenkins:
 > az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/${SUBSCRIPTION_ID}"
+
 Your appId, password, sp_name, and tenant are returned. Make a note of the appId and password.
 
 4. Save these values in a shell script in the console storage:
-#!/bin/sh
+> #!/bin/sh
 echo "Setting environment variables for Terraform"
 export ARM_SUBSCRIPTION_ID=your_subscription_id
 export ARM_CLIENT_ID=your_appId
@@ -50,6 +51,7 @@ Save the Terraform file to the console storage.
 
 6. Initialize the Terraform deployment:
 > terraform init
+
 The system should return a message indicating successful initialization.
 
 7. Update the resource group name in the Terraform file.
@@ -59,6 +61,7 @@ The system should return a message indicating successful initialization.
 
 9. Review the actions to be completed by the Terraform script with terraform plan command. When ready to create the resource group, apply the Terraform plan as follows:
 > terraform apply
+
 Terraform will output the execution plan and prompt to proceed.  Answer yes to proceed.
 
 After provisioning via Terraform the  client will have the option to administer the infrastructure via Terraform, the Azure Portal or Azure Client Interface.  If either of the latter two options are used, it will be critical not to return to Terraform without accurately updating the known state of the infrastructure using the import function in Terraform.  Failure to do so can lead to unwanted deletion and/or recreation of resources under management.  Always examine the plan before agreeing to any changes proposed by Terraform.
