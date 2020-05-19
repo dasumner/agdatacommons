@@ -28,39 +28,39 @@ Terraform will provision the following infrastructure resources:
 It is assumed that the resource group has been created.  The administrator should perform the following tasks via the Azure Portal Command Console:
 
 1. get a list of subscription ID and tenant ID values:
-> az account list --query "[].{name:name, subscriptionId:id, tenantId:tenantId}"
+`az account list --query "[].{name:name, subscriptionId:id, tenantId:tenantId}"`
 
 2. Set the SUBSCRIPTION_ID environment variable with the value for the subscription where the infrastructure will be deployed:
-> az account set --subscription="${SUBSCRIPTION_ID}"
+`az account set --subscription="${SUBSCRIPTION_ID}"`
 
 3. Create a service principal for use by Terraform and Jenkins:
-> az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/${SUBSCRIPTION_ID}"
+`az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/${SUBSCRIPTION_ID}"`
 
 Your appId, password, sp_name, and tenant are returned. Make a note of the appId and password.
 
 4. Save these values in a shell script to the console storage:
-> #!/bin/sh
+`#!/bin/sh
 echo "Setting environment variables for Terraform"
 export ARM_SUBSCRIPTION_ID=your_subscription_id
 export ARM_CLIENT_ID=your_appId
 export ARM_CLIENT_SECRET=your_password
-export ARM_TENANT_ID=your_tenant_id
+export ARM_TENANT_ID=your_tenant_id`
 
 5. Execute the shell script to set the required environment variables.
 Save the Terraform file to the console storage.
 
 6. Initialize the Terraform deployment:
-> terraform init
+`terraform init`
 
 The system should return a message indicating successful initialization.
 
 7. Update the resource group name in the Terraform file.
 
 8. Import the resource group into the state file.
-> terraform import azurerm_resource_group.<resource_group_name>
+`terraform import azurerm_resource_group.<resource_group_name>`
 
 9. Review the actions to be completed by the Terraform script with terraform plan command. When ready to create the resource group, apply the Terraform plan as follows:
-> terraform apply
+`terraform apply`
 
 Terraform will output the execution plan and prompt to proceed.  Answer yes to proceed.
 
