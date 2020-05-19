@@ -1,7 +1,7 @@
 ## Executing the Terraform Plan
-It is assumed that the resource group has been created.  The administrator should perform the following tasks via the Azure Portal Command Console:
+The starting point for the deployment of the infrastructure is an Azure subscription and a resource group that will host all the resources.  With these in place the administrator should perform the following tasks via the Azure Portal Cloud Shell:
 
-1. get a list of subscription ID and tenant ID values:
+1. Get a list of subscription ID and tenant ID values:
 
 `az account list --query "[].{name:name, subscriptionId:id, tenantId:tenantId}"`
 
@@ -13,9 +13,9 @@ It is assumed that the resource group has been created.  The administrator shoul
 
 `az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/${SUBSCRIPTION_ID}"`
 
-Your appId, password, sp_name, and tenant are returned. Make a note of the appId and password.
+Your appId, password, sp_name, and tenantId are returned. **Make a note of the appId and password** as these cannot be recovered after this point.
 
-4. Save these values in a shell script to the console storage:
+4. Save these values in a shell script:
 
 ```
 #!/bin/sh
@@ -37,11 +37,12 @@ The system should return a message indicating successful initialization.
 
 7. Update the resource group name in the Terraform file.
 
-8. Import the resource group into the state file.
+8. Import the resource group into the terraform state file.
 
 `terraform import azurerm_resource_group.<resource_group_name>`
 
-9. Review the actions to be completed by the Terraform script with terraform plan command. When ready to create the resource group, apply the Terraform plan as follows:
+9. Review the actions to be completed by the Terraform script with `terraform plan` command. When ready to create the resource group, apply the Terraform plan as follows:
+
 `terraform apply`
 
 Terraform will output the execution plan and prompt to proceed.  Answer yes to proceed.
