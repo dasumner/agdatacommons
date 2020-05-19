@@ -1,4 +1,4 @@
-# agdatacommons
+# AgDataCommons Azure Deployment
 Provisioning
 The infrastructure will be provisioned in a customer-provided Azure account.  The starting point for the build will require the Azure resources listed below.  CivicActions can provide the Terraform code to the client to run.  After successful provisioning the client can provide the required credentials and/or access keys to CivicActions.  Alternatively, the customer will provide a privileged account which CivicActions will use to provision the infrastructure.  The required Azure resources are:
 
